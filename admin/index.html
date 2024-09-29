@@ -22,29 +22,34 @@
             font-family: "Kanit", sans-serif;
         }
 
-        ::after,::before{
+        ::after,
+        ::before {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        a{
+
+        a {
             text-decoration: none !important;
         }
-        li{
+
+        li {
             list-style: none !important;
         }
-        h1{
+
+        h1 {
             font-weight: 600;
             font-size: 1.5rem;
         }
 
-        .main{
+        .main {
             min-height: 100vh !important;
             width: 100%;
             overflow: hidden !important;
             transition: all 0.35s ease-in-out;
             background-color: #fafbfe;
         }
+
         #sidebar {
             background-color: #5CAF90;
             min-width: 70px;
@@ -55,28 +60,33 @@
             width: 70px;
         }
 
-        #sidebar.expand{
-            width:260px;
+        #sidebar.expand {
+            width: 260px;
             min-width: 260px;
         }
-        #toggle-btn{
+
+        #toggle-btn {
             background-color: transparent;
             cursor: pointer;
             border: 0;
             padding: 1rem;
         }
-        #toggle-btn i{
+
+        #toggle-btn i {
             font-size: 1.5rem;
             color: #fff;
         }
+
         .sidebar-logo {
             margin: auto 0;
         }
-        .sidebar-logo a{
-            color:#fff;
+
+        .sidebar-logo a {
+            color: #fff;
             font-size: 2rem;
             font-weight: 600;
         }
+
         .sidebar a {
             color: white;
             padding: 15px;
@@ -85,15 +95,16 @@
         }
 
         #sidebar:not(.expand) .sidebar-logo,
-        #sidebar:not(.expand) a.sidebar-link span{
+        #sidebar:not(.expand) a.sidebar-link span {
             display: none;
         }
 
-        .sidebar-nav{
-            padding:2rem 0;
+        .sidebar-nav {
+            padding: 2rem 0;
             flex: 1 1 auto;
         }
-        a.sidebar-link{
+
+        a.sidebar-link {
             padding: 0.625rem 1.625rem;
             color: #fff;
             display: block !important;
@@ -101,15 +112,18 @@
             white-space: nowrap;
             border-left: 3px solid transparent;
         }
-        .sidebar-link i{
+
+        .sidebar-link i {
             font-size: 1.10rem;
             margin-right: 0.75rem;
         }
-        a.sidebar-link:hover{
-            background-color: rgba(255,255,255,0.075);
+
+        a.sidebar-link:hover {
+            background-color: rgba(255, 255, 255, 0.075);
             border-left: 3px solid #3b7d;
         }
-        .sidebar-item{
+
+        .sidebar-item {
             position: relative;
         }
 
@@ -156,25 +170,25 @@
                 </li>
                 <li class="sidebar-item">
                     <a href="category.html" class="sidebar-link">
-                        <i class="fa-regular fa-plus"></i>
+                        <i class="fa-solid fa-list"></i>
                         <span>Add Category</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="all_flowers.html" class="sidebar-link">
-                        <i class="fa-solid fa-list-check"></i>
+                        <i class="fas fa-seedling"></i>
                         <span>Flowers</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="orders.html" class="sidebar-link">
-                        <i class="fa-solid fa-list-check"></i>
+                        <i class="fas fa-receipt"></i>
                         <span>Orders</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="all_users.html" class="sidebar-link">
-                        <i class="fa-solid fa-list-check"></i>
+                        <i class="fas fa-users"></i>
                         <span>Users</span>
                     </a>
                 </li>
@@ -187,11 +201,35 @@
             </div>
         </aside>
 
-        <div class="main p-3">
-            <div class="text-center">
-                <h1>
+        <div class="main p-4 bg-light">
+            <div class="text-center mb-4">
+                <h1 class="display-5 text-dark font-weight-bold">
                     Welcome to Admin Dashboard
                 </h1>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card text-center shadow-lg border-primary">
+                        <div class="card-header text-white font-weight-bold" style="background-color: #5CAF90;">
+                            Total Orders
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title display-4" id="total-orders-count">Loading...</div>
+                            <p class="card-text">Number of orders placed.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card text-center shadow-lg border-success">
+                        <div class="card-header text-white font-weight-bold" style="background-color: #5CAF90;">
+                            Total Users
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title display-4" id="total-users-count">Loading...</div>
+                            <p class="card-text">Number of registered users.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -202,4 +240,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -179,3 +179,40 @@ const handleLogout = () => {
         })
         .catch((err) => console.log("logout error:: ", err));
 };
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const orderCountApiUrl = 'https://flowerworld.onrender.com/orders/orders/order_count/';
+    const userCountApiUrl = 'https://flowerworld.onrender.com/user/user-count/';
+
+    function fetchOrderCount() {
+        fetch(orderCountApiUrl)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('total-orders-count').innerText = data.total_orders;
+            })
+            .catch(error => {
+                console.error('Error fetching order count:', error);
+                document.getElementById('total-orders-count').innerText = 'Error loading count';
+            });
+    }
+
+    function fetchUserCount() {
+        fetch(userCountApiUrl)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('total-users-count').innerText = data.total_users;
+            })
+            .catch(error => {
+                console.error('Error fetching user count:', error);
+                document.getElementById('total-users-count').innerText = 'Error loading count';
+            });
+    }
+
+    fetchOrderCount();
+    fetchUserCount();
+    setInterval(() => {
+        fetchOrderCount();
+        fetchUserCount();
+    }, 5000);
+});
