@@ -41,18 +41,26 @@ const fetchFlowers = () => {
                 const row = document.createElement("tr");
                 const nameCell = document.createElement("td");
                 nameCell.textContent = flower.flower_name;
+                nameCell.style.textAlign = "center";
+                nameCell.style.verticalAlign = "middle";
                 row.appendChild(nameCell);
 
                 const priceCell = document.createElement("td");
                 priceCell.textContent = `$${flower.price}`;
+                priceCell.style.textAlign = "center";
+                priceCell.style.verticalAlign = "middle";
                 row.appendChild(priceCell);
 
                 const quantityCell = document.createElement("td");
                 quantityCell.textContent = flower.stock;
+                quantityCell.style.textAlign = "center";
+                quantityCell.style.verticalAlign = "middle";
                 row.appendChild(quantityCell);
 
                 const categoryCell = document.createElement("td");
                 categoryCell.textContent = flower.category.name;
+                categoryCell.style.textAlign = "center";
+                categoryCell.style.verticalAlign = "middle";
                 row.appendChild(categoryCell);
 
                 const imageCell = document.createElement("td");
@@ -77,6 +85,8 @@ const fetchFlowers = () => {
                 deleteButton.classList.add("btn", "btn-danger", "ms-2");
                 deleteButton.onclick = () => deleteFlower(flower.id);
 
+                actionsCell.style.textAlign = "center";
+                actionsCell.style.verticalAlign = "middle";
                 actionsCell.appendChild(editButton);
                 actionsCell.appendChild(deleteButton);
                 row.appendChild(actionsCell);

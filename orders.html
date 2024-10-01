@@ -206,57 +206,6 @@
     </div>
     <!-- Footer End -->
     
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', fetchUserOrders);
-
-        function fetchUserOrders() {
-            const ordersApiUrl = "https://flowerworld.onrender.com/orders/orders/";
-            const ordersContainer = document.getElementById("orders-container");
-            const userId = localStorage.getItem("user_id");
-            const token = localStorage.getItem("token");
-
-            console.log("Logged-in User ID:", userId);
-
-            fetch(ordersApiUrl, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Token ${token}`
-                }
-            })
-                .then(response => response.json())
-                .then(orders => {
-                    console.log("Fetched Orders:", orders);
-
-                    ordersContainer.innerHTML = "";
-
-                    // Filter orders for the logged-in user
-                    const user_orders = orders.filter(order => String(order.user) === String(userId));
-                    console.log("Filtered User Orders:", user_orders);
-
-                    if (user_orders.length === 0) {
-                        ordersContainer.innerHTML = "<p>No orders found for this user.</p>";
-                    } else {
-                        user_orders.forEach(order => {
-                            const orderCard = `
-                        <div class="order-card">
-                            <h4>Order ID: ${order.id}</h4>
-                            <p>Flower: ${order.flower_name}</p>
-                            <p>Quantity: ${order.quantity}</p>
-                            <p>Total Amount: $${order.total_amount}</p>
-                            <p>Status: ${order.status}</p>
-                            <p>Placed Time: ${new Date(order.placed_time).toLocaleString()}</p>
-                        </div>
-                    `;
-                            ordersContainer.innerHTML += orderCard;
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error("Error fetching orders:", error);
-                    ordersContainer.innerHTML = "<p>Failed to load orders. Please try again later.</p>";
-                });
-        }
-    </script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/flowers.js"></script>

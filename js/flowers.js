@@ -34,17 +34,24 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
                             <div class="rounded position-relative fruite-item">
                                 <div class="fruite-img">
-                                    <img src="${flower.image}" class="flower-image img-fluid w-100 rounded-top" alt="${flower.flower_name}" data-flower-id="${flower.id}">
+                                    <img src="${flower.image
+                        }" class="flower-image img-fluid w-100 rounded-top" alt="${flower.flower_name
+                        }" data-flower-id="${flower.id}">
                                 </div>
                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
-                                    ${flower.category && flower.category.name ? flower.category.name : 'No Category'}
+                                    ${flower.category && flower.category.name
+                            ? flower.category.name
+                            : "No Category"
+                        }
                                 </div>
                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                     <h4>${flower.flower_name}</h4>
-                                    <p>${flower.description.slice(0,100)}</p>
+                                    <p>${flower.description.slice(0, 100)}</p>
                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold mb-0">$${flower.price}</p>
-                                        <button class="btn border border-secondary rounded-pill px-3 text-primary buy-now-btn" data-flower-id="${flower.id}" data-flower-price="${flower.price}">
+                                        <p class="text-dark fs-5 fw-bold mb-0">$${flower.price
+                        }</p>
+                                        <button class="btn border border-secondary rounded-pill px-3 text-primary buy-now-btn" data-flower-id="${flower.id
+                        }" data-flower-price="${flower.price}">
                                             <i class="fa-solid fa-cart-shopping text-primary"></i> Buy Now
                                         </button>
                                     </div>
@@ -62,37 +69,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function attachBuyNowListeners() {
-        document.querySelectorAll('.buy-now-btn').forEach(button => {
-            button.addEventListener('click', function(event) {
+        document.querySelectorAll(".buy-now-btn").forEach((button) => {
+            button.addEventListener("click", function (event) {
                 event.preventDefault(); // Prevent default button behavior
-                const flowerId = this.getAttribute('data-flower-id');
-                const flowerPrice = this.getAttribute('data-flower-price');
+                const flowerId = this.getAttribute("data-flower-id");
+                const flowerPrice = this.getAttribute("data-flower-price");
                 const quantity = 1;
                 const userId = localStorage.getItem("user_id");
                 const token = localStorage.getItem("token");
 
-                fetch('https://flowerworld.onrender.com/orders/orders/', {
-                    method: 'POST',
+                fetch("https://flowerworld.onrender.com/orders/orders/", {
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Token ${token}`
+                        "Content-Type": "application/json",
+                        Authorization: `Token ${token}`,
                     },
                     body: JSON.stringify({
                         flower: flowerId,
                         user: userId,
                         quantity: quantity,
-                        total_amount: flowerPrice * quantity
+                        total_amount: flowerPrice * quantity,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("Order successfully placed:", data);
+                        alert("Order placed successfully!");
                     })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Order successfully placed:', data);
-                    alert('Order placed successfully!');
-                })
-                .catch(error => {
-                    console.error('Error placing order:', error);
-                    alert('Failed to place order.');
-                });
+                    .catch((error) => {
+                        console.error("Error placing order:", error);
+                        alert("Failed to place order.");
+                    });
             });
         });
     }
@@ -106,9 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const apiUrl = "https://flowerworld.onrender.com/flowers/";
     const flowerContainer = document.getElementById("flower-container");
@@ -120,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((response) => response.json())
             .then((flowers) => {
                 flowerContainer.innerHTML = "";
-                const filteredFlowers = flowers.filter(flower =>
+                const filteredFlowers = flowers.filter((flower) =>
                     flower.flower_name.toLowerCase().includes(searchTerm.toLowerCase())
                 );
 
@@ -129,17 +133,24 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
                             <div class="rounded position-relative fruite-item">
                                 <div class="fruite-img">
-                                    <img src="${flower.image}" class="flower-image img-fluid w-100 rounded-top" alt="${flower.flower_name}" data-flower-id="${flower.id}">
+                                    <img src="${flower.image
+                        }" class="flower-image img-fluid w-100 rounded-top" alt="${flower.flower_name
+                        }" data-flower-id="${flower.id}">
                                 </div>
                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
-                                    ${flower.category && flower.category.name ? flower.category.name : 'No Category'}
+                                    ${flower.category && flower.category.name
+                            ? flower.category.name
+                            : "No Category"
+                        }
                                 </div>
                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                     <h4>${flower.flower_name}</h4>
-                                    <p>${flower.description.slice(0,100)}</p>
+                                    <p>${flower.description.slice(0, 100)}</p>
                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold mb-0">$${flower.price}</p>
-                                        <button class="btn border border-secondary rounded-pill px-3 buy-now-btn" data-flower-id="${flower.id}" data-flower-price="${flower.price}">
+                                        <p class="text-dark fs-5 fw-bold mb-0">$${flower.price
+                        }</p>
+                                        <button class="btn border border-secondary rounded-pill px-3 buy-now-btn" data-flower-id="${flower.id
+                        }" data-flower-price="${flower.price}">
                                             <i class="fa-solid fa-cart-shopping"></i> Buy Now
                                         </button>
                                     </div>
@@ -150,35 +161,35 @@ document.addEventListener("DOMContentLoaded", () => {
                     flowerContainer.innerHTML += flowerCard;
                 });
 
-                document.querySelectorAll('.buy-now-btn').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const flowerId = this.getAttribute('data-flower-id');
-                        const flowerPrice = this.getAttribute('data-flower-price');
+                document.querySelectorAll(".buy-now-btn").forEach((button) => {
+                    button.addEventListener("click", function () {
+                        const flowerId = this.getAttribute("data-flower-id");
+                        const flowerPrice = this.getAttribute("data-flower-price");
 
                         const quantity = 1;
                         const userId = localStorage.getItem("user_id");
-                        fetch('https://flowerworld.onrender.com/orders/orders/', {
-                            method: 'POST',
+                        fetch("https://flowerworld.onrender.com/orders/orders/", {
+                            method: "POST",
                             headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Token ${localStorage.getItem("token")}`
+                                "Content-Type": "application/json",
+                                Authorization: `Token ${localStorage.getItem("token")}`,
                             },
                             body: JSON.stringify({
                                 flower: flowerId,
                                 user: userId,
                                 quantity: quantity,
-                                total_amount: flowerPrice * quantity
+                                total_amount: flowerPrice * quantity,
+                            }),
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log("Order successfully placed:", data);
+                                alert("Order placed successfully!");
                             })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Order successfully placed:', data);
-                            alert('Order placed successfully!');
-                        })
-                        .catch(error => {
-                            console.error('Error placing order:', error);
-                            alert('Failed to place order.');
-                        });
+                            .catch((error) => {
+                                console.error("Error placing order:", error);
+                                alert("Failed to place order.");
+                            });
                     });
                 });
             })
@@ -190,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     applyFiltersBtn.addEventListener("click", () => {
         const searchTerm = searchInput.value.trim();
         loadFlowers(searchTerm);
-        const modalElement = document.getElementById('searchModal');
+        const modalElement = document.getElementById("searchModal");
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
     });
@@ -207,17 +218,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function loadOrders() {
         fetch(ordersApiUrl, {
-            method: 'GET',
+            method: "GET",
             headers: {
-                'Authorization': `Token ${token}`
-            }
+                Authorization: `Token ${token}`,
+            },
         })
-        .then(response => response.json())
-        .then(orders => {
-            console.log("Fetched Orders:", orders);
+            .then((response) => response.json())
+            .then((orders) => {
+                console.log("Fetched Orders:", orders);
 
-            ordersContainer.innerHTML = "";
-            const orderTable = `
+                ordersContainer.innerHTML = "";
+                const orderTable = `
                         <table class="table table-bordered table-hover">
                         <thead class="table-light">
                             <tr>
@@ -234,40 +245,45 @@ document.addEventListener("DOMContentLoaded", () => {
                         </tbody>
                         </table>
                     `;
-            ordersContainer.innerHTML = orderTable;
-            const user_orders = orders.filter(order => String(order.user) === String(userId));
-            console.log("Filtered User Orders:", user_orders);  // Debugging: Verify filtered orders
+                ordersContainer.innerHTML = orderTable;
+                const user_orders = orders.filter(
+                    (order) => String(order.user) === String(userId)
+                );
+                console.log("Filtered User Orders:", user_orders); // Debugging: Verify filtered orders
 
-            if (user_orders.length === 0) {
-                ordersContainer.innerHTML = "<p>No orders found for this user.</p>";
-            } else {
-                user_orders.forEach(order => {
-                    const orderRow = `
+                if (user_orders.length === 0) {
+                    ordersContainer.innerHTML = "<p>No orders found for this user.</p>";
+                } else {
+                    user_orders.forEach((order) => {
+                        const orderRow = `
                         <tr>
                             <td>${order.id}</td>
                             <td>${order.flower_name}</td>
                             <td>${order.quantity}</td>
                             <td>$${order.total_amount}</td>
                             <td>${order.status}</td>
-                            <td>${new Date(order.placed_time).toLocaleString()}</td>
+                            <td>${new Date(
+                            order.placed_time
+                        ).toLocaleString()}</td>
                         </tr>
                     `;
-                    document.getElementById('orderTableBody').insertAdjacentHTML('beforeend', orderRow);
-                });
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching orders:", error);
-        });
+                        document
+                            .getElementById("orderTableBody")
+                            .insertAdjacentHTML("beforeend", orderRow);
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching orders:", error);
+            });
     }
     loadOrders();
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
-    document.body.addEventListener('click', function(event) {
-        if (event.target.classList.contains('flower-image')) {
-            const flowerID = event.target.getAttribute('data-flower-id');
+    document.body.addEventListener("click", function (event) {
+        if (event.target.classList.contains("flower-image")) {
+            const flowerID = event.target.getAttribute("data-flower-id");
             showFlowerDetails(flowerID);
         }
     });
@@ -275,85 +291,91 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const showFlowerDetails = (flowerID) => {
     fetch(`https://flowerworld.onrender.com/flowers/${flowerID}/`)
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
             viewSingleFlower(data);
         })
-        .catch(error => {
-            console.error('Error fetching flower details:', error);
+        .catch((error) => {
+            console.error("Error fetching flower details:", error);
         });
 };
 
 const viewSingleFlower = (flower) => {
-    const modalTitle = document.getElementById("singleFlowerTitle");
     const modalBody = document.getElementById("singleFlowerbody");
 
-    modalTitle.innerText = flower.flower_name;
     modalBody.innerHTML = `
-        <div class="card shadow-lg border-0">
-    <div class="row g-0">
-        <div class="col-md-4 d-flex justify-content-center align-items-center bg-light rounded-start">
-            <img src="${flower.image}" class="img-fluid rounded-3" alt="${flower.flower_name}" style="height: 150px; width:400px;">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body p-4">
-                <h4 class="card-title text-primary mb-3">${flower.flower_name}</h4>
-                <p class="card-text mb-2">
-                    <span class="badge bg-success text-white fs-5">$${flower.price}</span>
-                </p>
-                <p class="card-text mb-2">
-                    <span class="badge bg-secondary">${flower.category ? flower.category.name : 'No Category'}</span>
-                </p>
-                <p class="text-muted mb-4"><strong>Description:</strong> ${flower.description.slice(0, 180)}...</p>
+    <div class="card shadow-lg border-0 position-relative">
+        <!-- Close button at the top-right corner -->
+        <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close"></button>
+        
+        <div class="row g-0">
+            <div class="col-md-4 d-flex justify-content-center align-items-center bg-light rounded-start">
+                <img src="${flower.image}" class="img-fluid rounded-3" alt="${flower.flower_name
+        }" style="height: 150px; width:400px;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body p-4">
+                    <h4 class="card-title text-primary mb-3">${flower.flower_name
+        }</h4>
+                    <p class="card-text mb-2">
+                        <span class="badge bg-success text-white fs-5">$${flower.price
+        }</span>
+                    </p>
+                    <p class="card-text mb-2">
+                        <span class="badge bg-secondary">${flower.category ? flower.category.name : "No Category"
+        }</span>
+                    </p>
+                    <p class="text-muted mb-4"><strong>Description:</strong> ${flower.description.slice(
+            0,
+            180
+        )}...</p>
 
-                <div class="d-flex justify-content-between">
-                    <button class="btn border border-secondary rounded-pill px-3 buy-now-btn" data-flower-id="${flower.id}" data-flower-price="${flower.price}">
-                        <i class="fa-solid fa-cart-shopping"></i> Buy Now
-                    </button>
-                    <button class="btn btn-outline-info btn-sm px-4 py-2">More Info</button>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn border border-secondary rounded-pill px-3 buy-now-btn" data-flower-id="${flower.id
+        }" data-flower-price="${flower.price}">
+                            <i class="fa-solid fa-cart-shopping"></i> Buy Now
+                        </button>
+                        <button class="btn btn-outline-info btn-sm px-4 py-2">More Info</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+`;
 
-    `;
-    document.querySelectorAll('.buy-now-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const flowerId = this.getAttribute('data-flower-id');
-            const flowerPrice = this.getAttribute('data-flower-price');
+    document.querySelectorAll(".buy-now-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+            const flowerId = this.getAttribute("data-flower-id");
+            const flowerPrice = this.getAttribute("data-flower-price");
 
             const quantity = 1;
             const userId = localStorage.getItem("user_id");
-            fetch('https://flowerworld.onrender.com/orders/orders/', {
-                method: 'POST',
+            fetch("https://flowerworld.onrender.com/orders/orders/", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Token ${localStorage.getItem("token")}`
+                    "Content-Type": "application/json",
+                    Authorization: `Token ${localStorage.getItem("token")}`,
                 },
                 body: JSON.stringify({
                     flower: flowerId,
                     user: userId,
                     quantity: quantity,
-                    total_amount: flowerPrice * quantity
+                    total_amount: flowerPrice * quantity,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Order successfully placed:", data);
+                    alert("Order placed successfully!");
                 })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Order successfully placed:', data);
-                alert('Order placed successfully!');
-            })
-            .catch(error => {
-                console.error('Error placing order:', error);
-                alert('Failed to place order.');
-            });
+                .catch((error) => {
+                    console.error("Error placing order:", error);
+                    alert("Failed to place order.");
+                });
         });
     });
-    const flowerDetailsModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    const flowerDetailsModal = new bootstrap.Modal(
+        document.getElementById("exampleModal")
+    );
     flowerDetailsModal.show();
 };
-
-
-
-
-

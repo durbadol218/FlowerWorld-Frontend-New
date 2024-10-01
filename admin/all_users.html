@@ -51,14 +51,19 @@
         }
 
         #sidebar {
-            background-color: #5CAF90;
-            min-width: 70px;
-            z-index: 1000;
-            transition: all 0.25s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            width: 70px;
-        }
+    background-color: #5CAF90;
+    min-width: 70px;
+    z-index: 1000;
+    transition: all 0.25s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    width: 70px;
+    position: fixed;  /* Sidebar fixed */
+    height: 100vh;    /* Full height */
+    top: 0;           /* Stick to the top of the page */
+    left: 0;          /* Stick to the left of the page */
+    overflow-y: auto; /* Enable scrolling inside sidebar if necessary */
+}
 
         #sidebar.expand {
             width: 260px;
