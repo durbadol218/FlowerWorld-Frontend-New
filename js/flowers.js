@@ -208,11 +208,97 @@ document.addEventListener("DOMContentLoaded", () => {
     loadFlowers();
 });
 
+// document.addEventListener("DOMContentLoaded", () => {
+//     const ordersApiUrl = "https://flowerworld.onrender.com/orders/orders/";
+//     const ordersContainer = document.getElementById("orders-container");
+//     const userId = localStorage.getItem("user_id");
+//     const token = localStorage.getItem("token");
+
+//     console.log("Logged-in User ID:", userId);
+
+//     function loadOrders() {
+//         fetch(ordersApiUrl, {
+//             method: "GET",
+//             headers: {
+//                 Authorization: `Token ${token}`,
+//             },
+//         })
+//             .then((response) => response.json())
+//             .then((orders) => {
+//                 console.log("Fetched Orders:", orders);
+
+//                 ordersContainer.innerHTML = "";
+//                 const orderTable = `
+//                         <table class="table table-bordered table-hover">
+//                         <thead class="table-light">
+//                             <tr>
+//                                 <th scope="col">Order ID</th>
+//                                 <th scope="col">Flower Name</th>
+//                                 <th scope="col">Quantity</th>
+//                                 <th scope="col">Total Amount</th>
+//                                 <th scope="col">Status</th>
+//                                 <th scope="col">Placed Time</th>
+//                             </tr>
+//                         </thead>
+//                         <tbody id="orderTableBody">
+//                             <!-- Dynamic order rows will be inserted here -->
+//                         </tbody>
+//                         </table>
+//                     `;
+//                 ordersContainer.innerHTML = orderTable;
+//                 const user_orders = orders.filter(
+//                     (order) => String(order.user) === String(userId)
+//                 );
+//                 console.log("Filtered User Orders:", user_orders); // Debugging: Verify filtered orders
+
+//                 if (user_orders.length === 0) {
+//                     ordersContainer.innerHTML = "<p>No orders found for this user.</p>";
+//                 } else {
+//                     user_orders.forEach((order) => {
+//                         const orderRow = `
+//                         <tr>
+//                             <td>${order.id}</td>
+//                             <td>${order.flower_name}</td>
+//                             <td>${order.quantity}</td>
+//                             <td>$${order.total_amount}</td>
+//                             <td>${order.status}</td>
+//                             <td>${new Date(
+//                             order.placed_time
+//                         ).toLocaleString()}</td>
+//                         </tr>
+//                     `;
+//                         document
+//                             .getElementById("orderTableBody")
+//                             .insertAdjacentHTML("beforeend", orderRow);
+//                     });
+//                 }
+//             })
+//             .catch((error) => {
+//                 console.error("Error fetching orders:", error);
+//             });
+//     }
+//     loadOrders();
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
     const ordersApiUrl = "https://flowerworld.onrender.com/orders/orders/";
     const ordersContainer = document.getElementById("orders-container");
     const userId = localStorage.getItem("user_id");
     const token = localStorage.getItem("token");
+
+    function showLoginPrompt() {
+        ordersContainer.innerHTML = `
+            <div class="alert alert-warning" role="alert">
+                You must be logged in to view your orders. 
+                <a href="../login.html" class="alert-link">Click here to login</a>.
+            </div>`;
+    }
+
+    if (!userId || !token) {
+        console.log("User is not logged in. Showing login prompt...");
+        showLoginPrompt();
+        return;
+    }
 
     console.log("Logged-in User ID:", userId);
 
@@ -249,7 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const user_orders = orders.filter(
                     (order) => String(order.user) === String(userId)
                 );
-                console.log("Filtered User Orders:", user_orders); // Debugging: Verify filtered orders
+                console.log("Filtered User Orders:", user_orders);
 
                 if (user_orders.length === 0) {
                     ordersContainer.innerHTML = "<p>No orders found for this user.</p>";
@@ -279,6 +365,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     loadOrders();
 });
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", function (event) {
