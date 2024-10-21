@@ -1,4 +1,4 @@
-const loadCategories = (category) => {
+const loadCategories = () => {
   fetch("https://flowerworld.onrender.com/categories/")
     .then((response) => response.json())
     .then((data) => {
@@ -75,16 +75,22 @@ const fetchFlowers = () => {
 
         const actionsCell = document.createElement("td");
         const editButton = document.createElement("button");
-        editButton.textContent = "Edit";
         editButton.classList.add("btn", "btn-primary", "me-2");
         editButton.onclick = () => {
           window.location.href = `edit_flower.html?Id=${flower.id}`;
         };
 
+        const editIcon = document.createElement("i");
+        editIcon.classList.add("fas","fa-edit");
+        editButton.appendChild(editIcon);
+
         const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
         deleteButton.classList.add("btn", "btn-danger", "ms-2");
         deleteButton.onclick = () => deleteFlower(flower.id);
+
+        const deleteIcon = document.createElement("i");
+        deleteIcon.classList.add("fas","fa-trash");
+        deleteButton.appendChild(deleteIcon);
 
         actionsCell.style.textAlign = "center";
         actionsCell.style.verticalAlign = "middle";
@@ -133,18 +139,16 @@ function loadAllUsers() {
   })
     .then((response) => {
       if (response.status === 401) {
-        // Unauthorized, redirect to login page
         window.location.href = "/login.html";
       } else if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-      return response.json(); // Only parse JSON if status is OK
+      return response.json();
     })
     .then((data) => {
       const parent = document.getElementById("user_table");
       parent.innerHTML = "";
 
-      // Check if data exists and has users
       if (data && Array.isArray(data)) {
         data.forEach((user, index) => {
           const row = document.createElement("tr");
@@ -153,13 +157,6 @@ function loadAllUsers() {
                         <td>${user.first_name}</td>
                         <td>${user.last_name}</td>
                         <td>${user.email}</td>
-                        <td>
-                            <button class="btn btn-warning">
-                                <a href="edituser.html?Id=${
-                                  user.id
-                                }" class="text-decoration-none text-white">Edit</a>
-                            </button>
-                        </td>
                     `;
           parent.appendChild(row);
         });
@@ -198,6 +195,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "https://flowerworld.onrender.com/orders/orders/order_count/";
   const userCountApiUrl = "https://flowerworld.onrender.com/user/user-count/";
 
+  const flowerCountApiUrl = "https://flowerworld.onrender.com/flower/count/";
+
   function fetchOrderCount() {
     fetch(orderCountApiUrl)
       .then((res) => res.json())
@@ -225,11 +224,28 @@ document.addEventListener("DOMContentLoaded", function () {
           "Error loading count";
       });
   }
+  function fetchFlowerCategoryCount() {
+    fetch(flowerCountApiUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        document.getElementById("total-revenue-count").innerText =
+          data.total_flowers;
+        document.getElementById("pending-orders-count").innerText =
+          data.total_categories;
+      })
+      .catch((error) => {
+        console.error("Error fetching flower and category count:", error);
+        document.getElementById("total-revenue-count").innerText = "Error loading count";
+        document.getElementById("pending-orders-count").innerText = "Error loading count";
+      });
+  }
 
+  fetchFlowerCategoryCount();
   fetchOrderCount();
   fetchUserCount();
   setInterval(() => {
     fetchOrderCount();
     fetchUserCount();
+    fetchFlowerCategoryCount();
   }, 5000);
 });

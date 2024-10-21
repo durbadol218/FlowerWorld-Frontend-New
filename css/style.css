@@ -173,6 +173,17 @@ p.text-success {
     color: #fff;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+.bold-hr {
+    border: 0;
+    height: 2px;
+    background-color: #000;
+}
+
+
+
 .fruite-item {
     height: 450px;
     display: flex;
@@ -565,3 +576,39 @@ button[type="submit"]:hover {
 .carousel-indicators{
     bottom: -80px;
 }
+
+/* .accordion-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-height: 300px;
+}
+
+.accordion-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow-y: auto;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.accordion-collapse.show {
+    max-height: 500px;
+}
+
+.accordion-collapse {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.bold-hr {
+    border: 0;
+    height: 5px;
+    background-color: #000;
+}
+
+.accordion-item .accordion-button {
+    font-weight: bold;
+} */
+

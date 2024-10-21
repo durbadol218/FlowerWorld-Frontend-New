@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order List</title>
+    <title>Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -18,18 +18,9 @@
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="css/style.css" rel="stylesheet">
-    <style>
-        .order-card {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 
 <body>
-
     <header>
         <div class="container">
             <div class="row align-items-center">
@@ -57,12 +48,13 @@
                                             <a class="nav-link custom-nav-link" href="./contact.html">Contact Us</a>
                                         </li>
                                         <li class="nav-item me-3">
-                                            <a class="nav-link custom-nav-link" href="./orders.html">See Orders</a>
+                                            <a class="nav-link custom-nav-link" id="seeOrdersNav"
+                                                href="./orders.html">See Orders</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-    
+
                             <div class="me-3">
                                 <i class="fas fa-search" data-bs-toggle="modal" data-bs-target="#searchModal"></i>
                             </div>
@@ -70,9 +62,11 @@
                             <a href="./login.html" class="btn btn-outline-light login-button">Login</a>
                             <a href="./register.html" class="btn btn-outline-light register-button">Register</a>
 
-                            <a href="./profile.html" class="btn btn-outline-light profile-link d-none profile-button">Profile</a>
-                            <a onclick="handleLogout()" class="btn btn-outline-light logout-button d-none logout-button">Logout</a>
-    
+                            <a href="./profile.html"
+                                class="btn btn-outline-light profile-link d-none profile-button">Profile</a>
+                            <a onclick="handleLogout()"
+                                class="btn btn-outline-light logout-button d-none logout-button">Logout</a>
+
                             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                                 <span class="navbar-toggler-icon"></span>
@@ -83,7 +77,7 @@
             </div>
         </div>
     </header>
-    
+
 
     <!-- Search Modal -->
     <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
@@ -108,15 +102,13 @@
         </div>
     </div>
 
-    <div class="container">
-        <h1>Orders</h1>
-        <div id="orders-container">
-            
+    <div class="container mt-5">
+        <div id="flowerDetails" class="card">
+            <!-- Flower details will be rendered here -->
         </div>
     </div>
 
 
-    <!-- Footer Start -->
     <footer class="gi-footer mt-5">
         <div class="footer-container">
             <div class="footer-top py-5">
@@ -204,9 +196,140 @@
             </div>
         </div>
     </div>
-    <!-- Footer End -->
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function getQueryParams() {
+            const params = {};
+            window.location.search.substring(1).split("&").forEach(param => {
+                const [key, value] = param.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        const flowerId = getQueryParams().flowerId;
+
+        const fetchFlowerDetails = (flowerId) => {
+            fetch(`https://flowerworld.onrender.com/flowers/${flowerId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    renderFlowerDetails(data);
+                })
+                .catch(error => {
+                    console.error("Error fetching flower details:", error);
+                });
+        };
+
+        const renderFlowerDetails = (flower) => {
+            const flowerDetailsCard = document.getElementById("flowerDetails");
+            flowerDetailsCard.innerHTML = `
+                <div class="container p-3">
+                    <div class="row g-0">
+                        <div class="col-md-6 m-auto">
+                            <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="${flower.image}">
+                                <img src="${flower.image}" class="img-fluid rounded-start" alt="${flower.flower_name}">
+                            </a>
+                        </div>
+                        <div class="col-md-6 m-auto accordion-wrapper">
+                            <div class="card-body">
+                                <h4 class="card-title">Name: ${flower.flower_name}</h4>
+                                <p class="fw-bold fs-5">Category: ${flower.category ? flower.category.name : "No Category"}</p>
+                                <p class="text-dark fs-5 fw-bold">Price: $${flower.price}</p>
+                                <button class="btn border border-secondary rounded-pill px-3 buy-now-btn" data-flower-id="${flower.id}" data-flower-price="${flower.price}">
+                                    <i class="fa-solid fa-cart-shopping"></i> Buy Now
+                                </button>
+                                <hr class="my-4 bold-hr">
+                                <div class="accordion-container">
+                                    <!-- Shipping & Delivery Accordion -->
+                                    <div class="accordion" id="shippingAccordion">
+                                        <!-- Description Accordion -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTwo">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    Description
+                                                </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#shippingAccordion">
+                                                <div class="accordion-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <p>${flower.description}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    Shipping & Delivery
+                                                </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#shippingAccordion">
+                                                <div class="accordion-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <p>Our delivery time is maximum 6 hours once the payment is done.<br>
+                                                        All of our products are fresh and of great quality.<br>
+                                                        We deliver free flowers inside Dhaka, Bangladesh.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            const buyNowButton = flowerDetailsCard.querySelector(".buy-now-btn");
+            if (buyNowButton) {
+                buyNowButton.addEventListener("click", function () {
+                    const flowerId = this.getAttribute("data-flower-id");
+                    const flowerPrice = parseFloat(this.getAttribute("data-flower-price"));
+                    const quantity = 1;
+                    const userId = localStorage.getItem("user_id");
+
+                    fetch("https://flowerworld.onrender.com/orders/orders/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Token ${localStorage.getItem("token")}`,
+                        },
+                        body: JSON.stringify({
+                            flower: flowerId,
+                            user: userId,
+                            quantity: quantity,
+                            total_amount: flowerPrice * quantity,
+                        }),
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log("Order successfully placed:", data);
+                            alert("Order placed successfully!");
+                        })
+                        .catch((error) => {
+                            console.error("Error placing order:", error);
+                            alert("Failed to place order: " + error.message);
+                        });
+                });
+            }
+        };
+
+        if (flowerId) {
+            fetchFlowerDetails(flowerId);
+        } else {
+            document.getElementById("flowerDetails").innerHTML = `<p>No flower selected.</p>`;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
     <script src="js/auth.js"></script>
     <script src="js/flowers.js"></script>
 </body>

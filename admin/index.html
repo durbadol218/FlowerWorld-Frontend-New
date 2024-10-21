@@ -16,7 +16,7 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer">
     <style>
         body {
             font-family: "Kanit", sans-serif;
@@ -148,7 +148,6 @@
                     <a href="#">FlowerWorld</a>
                 </div>
             </div>
-
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
                     <a href="index.html" class="sidebar-link">
@@ -200,40 +199,89 @@
                 </a>
             </div>
         </aside>
-
         <div class="main p-4 bg-light">
             <div class="text-center mb-4">
                 <h1 class="display-5 text-dark font-weight-bold">
                     Welcome to Admin Dashboard
                 </h1>
             </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <div class="card text-center shadow-lg border-primary">
-                        <div class="card-header text-white font-weight-bold" style="background-color: #5CAF90;">
-                            Total Orders
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title display-4" id="total-orders-count">Loading...</div>
-                            <p class="card-text">Number of orders placed.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="card text-center shadow-lg border-success">
-                        <div class="card-header text-white font-weight-bold" style="background-color: #5CAF90;">
-                            Total Users
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title display-4" id="total-users-count">Loading...</div>
-                            <p class="card-text">Number of registered users.</p>
+            <div class="container d-flex justify-content-center align-items-center vh-100">
+                <div class="row d-flex justify-content-center w-100">
+                    <div class="col-md-6 mb-3">
+                        <div class="card text-center shadow-lg border-success">
+                            <div class="card-header text-white font-weight-bold" style="background-color: #5CAF90;">
+                                Total Orders
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title display-4" id="total-orders-count">Loading...</div>
+                                <p class="card-text">Number of orders placed.</p>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card text-center shadow-lg border-success">
+                            <div class="card-header text-white font-weight-bold" style="background-color: #5CAF90;">
+                                Total Users
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title display-4" id="total-users-count">Loading...</div>
+                                <p class="card-text">Number of registered users.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card text-center shadow-lg border-success">
+                            <div class="card-header text-white font-weight-bold" style="background-color: #5CAF90;">
+                                Total Product
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title display-4" id="total-revenue-count">Loading...</div>
+                                <p class="card-text">Total Products.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card text-center shadow-lg border-success">
+                            <div class="card-header text-white font-weight-bold" style="background-color: #5CAF90;">
+                                Total Category
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title display-4" id="pending-orders-count">Loading...</div>
+                                <p class="card-text">Total Category</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-6 mb-3">
+                            <div class="card text-center shadow-lg border-success">
+                                <div class="card-header text-white font-weight-bold" style="background-color: #5CAF90;">
+                                    Total Product
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-title display-4" id="total-revenue-count">Loading...</div>
+                                    <p class="card-text">Total Products.</p>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="col-md-6 mb-3">
+                            <div class="card text-center shadow-lg border-success">
+                                <div class="card-header text-white font-weight-bold" style="background-color: #5CAF90;">
+                                    Total Category
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-title display-4" id="pending-orders-count">Loading...</div>
+                                    <p class="card-text">Total Category</p>
+                                </div>
+                            </div>
+                        </div> -->
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Bootstrap JS and dependencies -->
     <script src="script.js"></script>
     <script src="admin_admin.js"></script>

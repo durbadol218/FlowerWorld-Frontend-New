@@ -133,9 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
                             <div class="rounded position-relative fruite-item">
                                 <div class="fruite-img">
-                                    <img src="${flower.image
-                        }" class="flower-image img-fluid w-100 rounded-top" alt="${flower.flower_name
-                        }" data-flower-id="${flower.id}">
+                                    <img src="${flower.image}" class="flower-image img-fluid w-100 rounded-top" alt="${flower.flower_name}" data-flower-id="${flower.id}">
+                                    <div class="position-absolute" style="top: 10px; right: 10px;">
+                                        <i class="fa fa-info-circle fa-lg cursor-pointer" onclick="showFlowerDetails(${flower.id})"></i>
+                                    </div>
                                 </div>
                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
                                     ${flower.category && flower.category.name
@@ -147,13 +148,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <h4>${flower.flower_name}</h4>
                                     <p>${flower.description.slice(0, 100)}</p>
                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold mb-0">$${flower.price
-                        }</p>
-                                        <button class="btn border border-secondary rounded-pill px-3 buy-now-btn" data-flower-id="${flower.id
-                        }" data-flower-price="${flower.price}">
+                                        <p class="text-dark fs-5 fw-bold mb-0">$${flower.price}</p>
+                                        <button class="btn border border-secondary rounded-pill px-3 buy-now-btn" data-flower-id="${flower.id}" data-flower-price="${flower.price}">
                                             <i class="fa-solid fa-cart-shopping"></i> Buy Now
                                         </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -338,7 +336,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("Filtered User Orders:", user_orders);
 
                 if (user_orders.length === 0) {
-                    ordersContainer.innerHTML = "<p>No orders found for this user.</p>";
+                    ordersContainer.innerHTML = `
+                        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <img style="height: 300px; width: 500px;" src="./image/undraw_empty_cart_co35.svg" alt="No orders found for this user." />
+                            <p style="margin-top: 20px; font-size: 18px;">No orders found for this user.</p>
+                        </div>
+                    `;
                 } else {
                     user_orders.forEach((order) => {
                         const orderRow = `
@@ -369,14 +372,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.body.addEventListener("click", function (event) {
-        if (event.target.classList.contains("flower-image")) {
-            const flowerID = event.target.getAttribute("data-flower-id");
-            showFlowerDetails(flowerID);
-        }
-    });
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//     document.body.addEventListener("click", function (event) {
+//         if (event.target.classList.contains("more-info")) {
+//             const flowerID = event.target.getAttribute("data-flower-id");
+//             showFlowerDetails(flowerID);
+//         }
+//     });
+// });
 
 const showFlowerDetails = (flowerID) => {
     fetch(`https://flowerworld.onrender.com/flowers/${flowerID}/`)
@@ -394,37 +397,26 @@ const viewSingleFlower = (flower) => {
 
     modalBody.innerHTML = `
     <div class="card shadow-lg border-0 position-relative">
-        <!-- Close button at the top-right corner -->
         <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close"></button>
-        
         <div class="row g-0">
             <div class="col-md-4 d-flex justify-content-center align-items-center bg-light rounded-start">
-                <img src="${flower.image}" class="img-fluid rounded-3" alt="${flower.flower_name
-        }" style="height: 150px; width:400px;">
+                <img src="${flower.image}" class="img-fluid rounded-3" alt="${flower.flower_name}" style="height: 150px; width:400px;">
             </div>
             <div class="col-md-8">
                 <div class="card-body p-4">
-                    <h4 class="card-title text-primary mb-3">${flower.flower_name
-        }</h4>
+                    <h4 class="card-title text-primary mb-3">${flower.flower_name}</h4>
                     <p class="card-text mb-2">
-                        <span class="badge bg-success text-white fs-5">$${flower.price
-        }</span>
+                        <span class="badge bg-success text-white fs-5">$${flower.price}</span>
                     </p>
                     <p class="card-text mb-2">
-                        <span class="badge bg-secondary">${flower.category ? flower.category.name : "No Category"
-        }</span>
+                        <span class="badge bg-secondary">${flower.category ? flower.category.name : "No Category"}</span>
                     </p>
-                    <p class="text-muted mb-4"><strong>Description:</strong> ${flower.description.slice(
-            0,
-            180
-        )}...</p>
-
+                    <p class="text-muted mb-4"><strong>Description:</strong> ${flower.description.slice(0,180)}...</p>
                     <div class="d-flex justify-content-between">
-                        <button class="btn border border-secondary rounded-pill px-3 buy-now-btn" data-flower-id="${flower.id
-        }" data-flower-price="${flower.price}">
+                        <button class="btn border border-secondary rounded-pill px-3 buy-now-btn" data-flower-id="${flower.id}" data-flower-price="${flower.price}">
                             <i class="fa-solid fa-cart-shopping"></i> Buy Now
                         </button>
-                        <button class="btn btn-outline-info btn-sm px-4 py-2">More Info</button>
+                        <button class="btn btn-outline-info btn-sm px-4 py-2" onclick="location.href='flower_details.html?flowerId=${flower.id}'">More Info</button>
                     </div>
                 </div>
             </div>
